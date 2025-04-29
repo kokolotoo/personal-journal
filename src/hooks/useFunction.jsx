@@ -25,16 +25,26 @@ const useFunction = () => {
     const saveEditedNote = async () => {
         try {
             const noteRef = doc(db, 'Users', user.id, 'Notes', editNoteId);
+            const noteSnap = await getDoc(noteRef);
+
+            if (!noteSnap.exists()) {
+                console.log('Note not found');
+                return;
+            }
+
+            const existingNote = noteSnap.data();
+            const oldCreatedAt = existingNote.createdAt || new Date(); // ако няма `createdAt`, използваме текущата дата като fallback
+
             await setDoc(noteRef, {
                 title: editTitle,
                 body: editBody,
-                createdAt: new Date() // може да запазиш стария createdAt ако искаш
+                createdAt: oldCreatedAt // запазваме оригиналната дата
             });
-            console.log('Note updated');
-            setEditNoteId(null); // приключи редакцията
+
+            setEditNoteId(null);
             setEditTitle('');
             setEditBody('');
-            fetchNotes(); // обновява бележките
+            fetchNotes();
         } catch (err) {
             console.log(err.message);
         }
@@ -70,7 +80,7 @@ const useFunction = () => {
 
     const addNote = async () => {
         if (title.trim() === '' || newNote.trim() === '') return
-        
+
         const now = new Date();
         const formattedDate = now.toISOString().replace(/[:.]/g, "-"); // безопасен ID без ':' и '.'
         try {

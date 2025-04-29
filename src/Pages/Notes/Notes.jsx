@@ -3,6 +3,7 @@ import styles from './notes.module.css';
 import xssProtect from '@/Utils/xssProtect';
 import useFunction from '@/hooks/useFunction';
 import Inputs from './Inputs';
+import SingleAcordeon from '../Home/SingleAcordeon';
 
 const Notes = () => {
     const [viewNotes, setViewNotes] = useState(false);
@@ -55,7 +56,7 @@ const Notes = () => {
                         allNotes.map(note => (
                             <div key={note.id} className={styles.note}>
                                 {editNoteId === note.id ? (
-                                    <div>
+                                    <div className={styles.edit_container}>
                                         <input
                                             type="text"
                                             value={editTitle}
@@ -64,18 +65,26 @@ const Notes = () => {
                                         <textarea
                                             value={editBody}
                                             onChange={(e) => setEditBody(e.target.value)}
+                                            rows={7}
                                         /> <br />
-                                        <button onClick={saveEditedNote}>Save</button>
-                                        <button onClick={() => setEditNoteId(null)}>Cancel</button>
+                                        <div className={styles.edited_buttons}>
+                                            <button onClick={saveEditedNote}>Save</button>
+                                            <button onClick={() => setEditNoteId(null)}>Cancel</button>
+                                        </div>
+
                                     </div>
                                 ) : (
-                                    <div>
-                                        <h3 dangerouslySetInnerHTML={{ __html: xssProtect(note.title) }} />
-                                        <p dangerouslySetInnerHTML={{ __html: xssProtect(new Date(note.createdAt.seconds * 1000).toLocaleString()) }} />
-                                        <p dangerouslySetInnerHTML={{ __html: xssProtect(note.body) }} />
-                                        <button onClick={() => deleteNote(note.id)}>Delete</button>
-                                        <button onClick={() => startEditing(note)}>Edit</button>
-                                    </div>
+                                    <SingleAcordeon title={new Date(note.createdAt.seconds * 1000).toLocaleString()}>
+                                        <div className={styles.single_note_container}>
+                                            <h3 dangerouslySetInnerHTML={{ __html: xssProtect(note.title) }} />
+                                                <p dangerouslySetInnerHTML={{ __html: xssProtect(note.body) }} />
+                                            <div className={styles.edited_buttons}>
+                                                <button onClick={() => deleteNote(note.id)}>Delete</button>
+                                                <button onClick={() => startEditing(note)}>Edit</button>
+                                            </div>
+                                        </div>
+                                    </SingleAcordeon>
+
                                 )}
                             </div>
                         ))
