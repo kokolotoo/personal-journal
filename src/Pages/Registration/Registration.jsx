@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import useRegistration from '@/Hooks/useRegistration';
+import useRegistration from '@/hooks/useRegistration';
 import styles from '../Login/login.module.css'
 
 
