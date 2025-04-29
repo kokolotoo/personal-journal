@@ -1,9 +1,67 @@
-.note_container{
-    height: calc(100vh - 5em);
+.note_container {
+    height: 90vh;
+    overflow: auto;
 }
 
-.note{
+.note {
     text-align: center;
-    border-bottom: 1px solid gray;
     padding: 0.5em;
+}
+
+.note textarea {
+    width: 76ch;
+    max-width: 100%;
+    padding: 0.3em;
+    font-size: 1.1em;
+}
+
+.note_section {
+
+    overflow: auto;
+}
+
+.button_section {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid rgb(68, 66, 66);
+
+
+    button {
+        padding: 0.5em;
+        letter-spacing: 1px;
+        border-radius: 0.3em;
+        border: none;
+    }
+}
+
+.add_note {
+    text-align: center;
+    margin-top: 3em;
+
+    input {
+        margin-bottom: 2em;
+        width: 66ch;
+        max-width: 100%;
+        padding: 1em;
+    }
+
+    textarea {
+        width: 76ch;
+        max-width: 100%;
+        padding: 0.5em;
+        min-height: 50vh;
+        font-size: 1.3em;
+        letter-spacing: 1px;
+    }
+
+    button {
+        padding: 1em;
+        margin-top: 1em;
+        border-radius: 0.3em;
+        border: none;
+        background-color: rgb(1, 151, 9);
+        color: aliceblue;
+    }
 }

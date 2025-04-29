@@ -13,7 +13,7 @@ const HomePage = () => {
       {login ? <HomeWithLogin />
         :
         <article>
-          <h2>Welcomme to Journal</h2>
+          <h2>Welcomme to your personal Journal</h2>
           <p>In this application, you can record your notes, thoughts, and reflections.</p>
           <p>You can create a to-do list.</p>
           <p>You can edit, delete, and add new.</p>
