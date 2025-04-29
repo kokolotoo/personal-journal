@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(8, 8, 8);
+    color: rgb(223, 225, 226);
+}
+
+html {
+    font-size: clamp(12px, 2.5vw, 18px);
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5;
+}
+
+button,
+a {
+    cursor: pointer;
+}

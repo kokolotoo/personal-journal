@@ -1,0 +1,9 @@
+.note_container{
+    height: calc(100vh - 5em);
+}
+
+.note{
+    text-align: center;
+    border-bottom: 1px solid gray;
+    padding: 0.5em;
+}

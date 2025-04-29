@@ -1,0 +1,58 @@
+.container {
+    background-image: url('@/assets/journal.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: calc(100vh - 5em);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 3em;
+}
+
+
+
+
+
+.login_container {
+    list-style: none;
+    color: rgb(197, 235, 123);
+
+    a {
+        text-decoration: none;
+        color: rgb(197, 235, 123);
+    }
+
+    li {
+        font-size: 2em;
+        cursor: pointer;
+        margin-top: 1em;
+    }
+}
+
+article {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    letter-spacing: 2px;
+    font-size: 1.4em;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+    p {
+        margin-bottom: 0.5em;
+        text-align: center;
+    }
+}
+
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid rgba(104, 103, 103, 0.596);
+    color: rgb(104, 104, 104);
+}
