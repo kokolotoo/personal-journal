@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import './notes.css'
 import xssProtect from '@/Utils/xssProtect';
 import useFunction from '@/hooks/useFunction';
 import Inputs from './Inputs';
 import SingleAcordeon from '../Home/SingleAcordeon';
+import { FloatButton } from 'antd';
+import { GoMoveToTop } from "react-icons/go";
 
 const Notes = () => {
 
@@ -31,6 +33,18 @@ const Notes = () => {
     const shownAllNote = () => {
         setVisibleNewNote(false)
         setViewNotes(true)
+    }
+
+
+    // Функция за скролиране до началото на елемента с overflow
+    const scrollToTopOfElement = () => {
+        const element = document.querySelector('.note_container');
+        if (element) {
+            element.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
     }
 
     return (
@@ -74,7 +88,9 @@ const Notes = () => {
 
                                     </div>
                                 ) : (
-                                    <SingleAcordeon title={new Date(note.createdAt.seconds * 1000).toLocaleString()}>
+                                    <SingleAcordeon
+                                        title={new Date(note.createdAt.seconds * 1000).toLocaleString()}
+                                    >
                                         <div className='single_note_container'>
                                             <h3 dangerouslySetInnerHTML={{ __html: xssProtect(note.title) }} />
                                             <p dangerouslySetInnerHTML={{ __html: xssProtect(note.body) }} />
@@ -86,12 +102,20 @@ const Notes = () => {
                                     </SingleAcordeon>
 
                                 )}
+
                             </div>
                         ))
                     ) : (
                         <p>No notes yet.</p>
                     )}
-
+                    <FloatButton
+                        onClick={scrollToTopOfElement}
+                        icon={<GoMoveToTop />}
+                        shape="square"
+                        style={{ insetInlineEnd: 25 }}
+                        visibilityHeight={100}//ще работи ако е на целия екран а не на компонент
+                    />
+                 
                 </section>
             }
         </main>

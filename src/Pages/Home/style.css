@@ -10,10 +10,9 @@
     max-height: none;
     transform: scaleY(1);
     padding-bottom: 0.5em;
-   
 }
 
-.acordeon{
+.acordeon {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

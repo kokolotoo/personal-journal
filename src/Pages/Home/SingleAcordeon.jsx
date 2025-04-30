@@ -11,6 +11,7 @@ const SingleAcordeon = ({ title, children }) => {
             <section
                 onClick={() => setIsOpen(prev => !prev)}
                 className='acordeon'
+                style={{ backgroundColor: isOpen && 'rgb(39, 60, 57)'}}
             >
                 <p>{title}</p>
                 {isOpen ? <FiChevronUp size={24} /> : <FiChevronDown size={24} />}
