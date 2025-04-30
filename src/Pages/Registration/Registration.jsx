@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useRegistration from '@/hooks/useRegistration';
-import styles from '../Login/login.module.css'
+import '../Login/login.css'
 
 
 
@@ -12,9 +12,9 @@ const Registration = () => {
     } = useRegistration()
 
     return (
-        <main className={styles.page_container}>
+        <main className='page_container_login'>
 
-            {successMessage && <h3 className={styles.message}>{successMessage}</h3>}
+            {successMessage && <h3 className='message'>{successMessage}</h3>}
 
             <form onSubmit={handleSubmit}>
                 <div>
@@ -67,7 +67,7 @@ const Registration = () => {
                         <p style={{ color: "red" }}>{errors.confirmPassword}</p>
                     )}
                     <div >
-                        <div className={styles.shown_pass}>
+                        <div className='shown_pass'>
                             <label htmlFor="showPassword" >Shown pass:</label>
                             <input
                                 type="checkbox"

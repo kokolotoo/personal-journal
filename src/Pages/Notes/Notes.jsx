@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import styles from './notes.module.css';
+import './notes.css'
 import xssProtect from '@/Utils/xssProtect';
 import useFunction from '@/hooks/useFunction';
 import Inputs from './Inputs';
@@ -34,8 +34,8 @@ const Notes = () => {
     }
 
     return (
-        <main className={styles.note_container}>
-            <header className={styles.button_section}>
+        <main className='note_container'>
+            <header className='button_section'>
                 <button onClick={shownAddNote}>New Note</button>
                 <button onClick={shownAllNote}>View All Note</button>
             </header>
@@ -51,12 +51,12 @@ const Notes = () => {
             }
 
             {viewNotes &&
-                <section className={styles.note_section}>
+                <section className='note_section'>
                     {allNotes.length > 0 ? (
                         allNotes.map(note => (
-                            <div key={note.id} className={styles.note}>
+                            <div key={note.id} className='note'>
                                 {editNoteId === note.id ? (
-                                    <div className={styles.edit_container}>
+                                    <div className='edit_container'>
                                         <input
                                             type="text"
                                             value={editTitle}
@@ -67,7 +67,7 @@ const Notes = () => {
                                             onChange={(e) => setEditBody(e.target.value)}
                                             rows={7}
                                         /> <br />
-                                        <div className={styles.edited_buttons}>
+                                        <div className='edited_buttons'>
                                             <button onClick={saveEditedNote}>Save</button>
                                             <button onClick={() => setEditNoteId(null)}>Cancel</button>
                                         </div>
@@ -75,10 +75,10 @@ const Notes = () => {
                                     </div>
                                 ) : (
                                     <SingleAcordeon title={new Date(note.createdAt.seconds * 1000).toLocaleString()}>
-                                        <div className={styles.single_note_container}>
+                                        <div className='single_note_container'>
                                             <h3 dangerouslySetInnerHTML={{ __html: xssProtect(note.title) }} />
                                             <p dangerouslySetInnerHTML={{ __html: xssProtect(note.body) }} />
-                                            <div className={styles.edited_buttons}>
+                                            <div className='edited_buttons'>
                                                 <button onClick={() => deleteNote(note.id)}>Delete</button>
                                                 <button onClick={() => startEditing(note)}>Edit</button>
                                             </div>

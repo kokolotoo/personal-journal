@@ -16,7 +16,7 @@ function App() {
   return (
 
     <DataProvider>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div style={{ textAlign: 'center' }}>Loading...</div>}>
         <Routes >
           <Route path='/' element={<Layout />}>
             <Route index element={<HomePage />} />

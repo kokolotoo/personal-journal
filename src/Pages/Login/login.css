@@ -1,4 +1,4 @@
-.page_container {
+.page_container_login {
     height: calc(100vh - 5em);
     background-image: url('@/assets/journal.webp');
     background-position: center;
@@ -12,18 +12,18 @@
     padding-top: 3em;
 }
 
-button,
-input {
+form>button,
+form input {
     font-size: 1.3em;
     padding: 0.4rem;
     width: 36ch;
     max-width: 100%;
 }
 
-section {
+.login-container {
     display: flex;
     flex-direction: column;
-    gap: 1.5em
+    gap: 1.5em;
 }
 
 form {
@@ -60,7 +60,7 @@ input[type="checkbox"] {
     margin-bottom: 2em;
 }
 
-.footer{
+.footer {
     display: flex;
     flex-direction: column;
     gap: 2em;

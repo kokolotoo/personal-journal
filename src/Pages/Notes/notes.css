@@ -5,7 +5,7 @@
 
 .note {
     text-align: center;
-    padding: 0.5em;
+    padding: 0.1em;
 }
 
 .note textarea {
@@ -22,9 +22,8 @@
 .button_section {
     display: flex;
     justify-content: space-around;
-    margin-top: 1em;
-    padding-bottom: 0.5em;
-    margin-bottom: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0.6em;
 }
 
 .button_section button {
@@ -36,33 +35,36 @@
 }
 
 .add_note {
-    text-align: center;
-    margin-top: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1em;
+   
+}
 
-    input {
-        margin-bottom: 2em;
-        width: 66ch;
-        max-width: 100%;
-        padding: 1em;
-    }
+.add_note input {
+    margin-bottom: 2em;
+    width: 66ch;
+    max-width: 100%;
+    padding: 1em;
+}
 
-    textarea {
-        width: 76ch;
-        max-width: 100%;
-        padding: 0.5em;
-        min-height: 50vh;
-        font-size: 1.3em;
-        letter-spacing: 1px;
-    }
+.add_note textarea {
+    width: 76ch;
+    max-width: 100%;
+    padding: 0.5em;
+    min-height: 50vh;
+    font-size: 1.3em;
+    letter-spacing: 1px;
+}
 
-    button {
-        padding: 1em;
-        margin-top: 1em;
-        border-radius: 0.3em;
-        border: none;
-        background-color: rgb(1, 151, 9);
-        color: aliceblue;
-    }
+.add_note button {
+    padding: 1em;
+    margin-top: 1em;
+    border-radius: 0.3em;
+    border: none;
+    background-color: rgb(1, 151, 9);
+    color: aliceblue;
 }
 
 .edit_container {
@@ -116,3 +118,4 @@
     font-size: 1.4em;
     white-space: pre-line;
 }
+

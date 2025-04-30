@@ -73,7 +73,6 @@ const useFunction = () => {
                 ...doc.data()
             })).reverse();
             setAllNotes(notesArray);
-            console.log(notesArray);
         } catch (err) {
             console.log(err.message);
         }

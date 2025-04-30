@@ -1,4 +1,4 @@
-import styles from './login.module.css'
+import './login.css'
 import React, { useState, useContext } from 'react';
 import DataContext from '@/Context/DataContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -69,7 +69,7 @@ const loginPage = () => {
 
 
     return (
-        <main className={styles.page_container}>
+        <main className='page_container_login'>
             <section className='login-container'>
 
                 <form onSubmit={signIn}>
@@ -82,6 +82,7 @@ const loginPage = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
+                            
                         />
 
                     </div>
@@ -98,11 +99,11 @@ const loginPage = () => {
 
                     </div>
 
-                    {loginError && <p className={styles.p}>{loginError}</p>}
+                    {loginError && <p className='p'>{loginError}</p>}
                     <button type="submit">Login</button>
                     <button type="button" onClick={logInWithGoogle}>Login with Google</button>
 
-                    <footer className={styles.footer}>
+                    <footer className='footer'>
                         <Link to='/registration' >Don't have an account!</Link>
                         <Link to='/forgot-page' >Forgot password or email </Link>
                     </footer>

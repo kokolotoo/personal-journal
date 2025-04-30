@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './notes.module.css'
+import './notes.css'
 
 const Inputs = ({
     title, setTitle, newNote, setNewNote, addNote
@@ -7,7 +7,7 @@ const Inputs = ({
 
 
     return (
-        <section className={styles.add_note}>
+        <section className='add_note'>
             <input
                 type="text"
                 placeholder='Note title'
