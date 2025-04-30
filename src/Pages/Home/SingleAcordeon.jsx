@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { useState } from 'react';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import './style.css'

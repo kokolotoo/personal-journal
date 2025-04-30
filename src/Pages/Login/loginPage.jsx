@@ -1,7 +1,7 @@
 import styles from './login.module.css'
 import React, { useState, useContext } from 'react';
 import DataContext from '@/Context/DataContext';
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 import { googleProvider, auth } from '../../hooks/firebase_config';
 import { signInWithPopup, signInWithEmailAndPassword, getAuth, sendPasswordResetEmail } from 'firebase/auth';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './homePage.module.css'
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/hooks/firebase_config';
 import { useContext, useState } from 'react';

@@ -4,7 +4,7 @@ import { FaRegUser } from "react-icons/fa"
 import { HiOutlineHome } from "react-icons/hi2";
 import DataContext from '@/Context/DataContext';
 import { useContext } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 
 

@@ -1,5 +1,5 @@
 import './App.css'
-import { Route, Routes } from 'react-router';
+import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { DataProvider } from './Context/DataContext';
 import Layout from './Layout/Layout';
