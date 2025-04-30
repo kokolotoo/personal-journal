@@ -6,14 +6,14 @@ import Inputs from './Inputs';
 import SingleAcordeon from '../Home/SingleAcordeon';
 
 const Notes = () => {
-    const [viewNotes, setViewNotes] = useState(false);
-    const [visibleNewNote, setVisibleNewNote] = useState(false);
+
     const {
         newNote, setNewNote, title, setTitle,
         allNotes, setAllNotes, editNoteId, setEditNoteId,
         editTitle, setEditTitle, editBody, setEditBody,
         startEditing, saveEditedNote, deleteNote, fetchNotes,
-        addNote, user
+        addNote, user, viewNotes, setViewNotes, visibleNewNote,
+        setVisibleNewNote
     } = useFunction()
 
 
@@ -77,7 +77,7 @@ const Notes = () => {
                                     <SingleAcordeon title={new Date(note.createdAt.seconds * 1000).toLocaleString()}>
                                         <div className={styles.single_note_container}>
                                             <h3 dangerouslySetInnerHTML={{ __html: xssProtect(note.title) }} />
-                                                <p dangerouslySetInnerHTML={{ __html: xssProtect(note.body) }} />
+                                            <p dangerouslySetInnerHTML={{ __html: xssProtect(note.body) }} />
                                             <div className={styles.edited_buttons}>
                                                 <button onClick={() => deleteNote(note.id)}>Delete</button>
                                                 <button onClick={() => startEditing(note)}>Edit</button>

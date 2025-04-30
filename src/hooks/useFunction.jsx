@@ -13,7 +13,8 @@ const useFunction = () => {
     const [editNoteId, setEditNoteId] = useState(null);
     const [editTitle, setEditTitle] = useState('');
     const [editBody, setEditBody] = useState('');
-
+    const [viewNotes, setViewNotes] = useState(false);
+    const [visibleNewNote, setVisibleNewNote] = useState(false);
 
 
     const startEditing = (note) => {
@@ -108,6 +109,8 @@ const useFunction = () => {
             setNewNote('');
             setTitle('');
             fetchNotes(); // ⚡ Рефрешваме списъка с бележки веднага!
+            setVisibleNewNote(false)
+            setViewNotes(true)
         } catch (err) {
             console.log(err.message);
         }
@@ -118,7 +121,8 @@ const useFunction = () => {
         allNotes, setAllNotes, editNoteId, setEditNoteId,
         editTitle, setEditTitle, editBody, setEditBody,
         startEditing, saveEditedNote, deleteNote, fetchNotes,
-        addNote, user
+        addNote, user, viewNotes, setViewNotes, visibleNewNote,
+        setVisibleNewNote
     }
 
 }

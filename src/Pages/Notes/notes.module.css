@@ -25,13 +25,14 @@
     margin-top: 1em;
     padding-bottom: 0.5em;
     margin-bottom: 1em;
+}
 
-    button {
-        padding: 0.5em;
-        letter-spacing: 1px;
-        border-radius: 0.3em;
-        border: none;
-    }
+.button_section button {
+    padding: 0.5em;
+    letter-spacing: 1px;
+    border-radius: 0.3em;
+    border: none;
+
 }
 
 .add_note {
@@ -67,6 +68,8 @@
 .edit_container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 0.5em;
 
     input,
@@ -109,7 +112,7 @@
     color: rgb(69, 245, 157);
 }
 
-.single_note_container>p{
+.single_note_container>p {
     font-size: 1.4em;
     white-space: pre-line;
 }

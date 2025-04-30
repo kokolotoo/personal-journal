@@ -1,6 +1,6 @@
 import './App.css'
-import { Route, Routes} from 'react-router';
-import { useEffect, useState, lazy } from 'react';
+import { Route, Routes } from 'react-router';
+import { lazy, Suspense } from 'react';
 import { DataProvider } from './Context/DataContext';
 import Layout from './Layout/Layout';
 
@@ -16,17 +16,18 @@ function App() {
   return (
 
     <DataProvider>
-      <Routes >
-        <Route path='/' element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/registration' element={<Registration />} />
-          <Route path='/forgot-page' element={<ForgotPage />} />
-          <Route path='/notes' element={<Notes />} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes >
+          <Route path='/' element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/registration' element={<Registration />} />
+            <Route path='/forgot-page' element={<ForgotPage />} />
+            <Route path='/notes' element={<Notes />} />
 
-        </Route>
-      </Routes>
-
+          </Route>
+        </Routes>
+      </Suspense>
     </DataProvider>
 
   )
