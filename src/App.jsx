@@ -9,6 +9,7 @@ const Login = lazy(() => import('../src/Pages/Login/loginPage'))
 const Registration = lazy(() => import('../src/Pages/Registration/Registration'))
 const ForgotPage = lazy(() => import('../src/Pages/Forgot-page/ForgotPage'))
 const Notes = lazy(() => import('../src/Pages/Notes/Notes'))
+const Calendar = lazy(() => import('../src/Pages/Calendar/Calendar'))
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
             <Route path='/registration' element={<Registration />} />
             <Route path='/forgot-page' element={<ForgotPage />} />
             <Route path='/notes' element={<Notes />} />
+            <Route path='/calendar' element={<Calendar />} />
 
           </Route>
         </Routes>
