@@ -47,13 +47,17 @@ const Notes = () => {
         }
     }
 
+
+
     return (
         <main className='note_container'>
             <header className='button_section'>
                 <button onClick={shownAddNote}>New Note</button>
                 <button onClick={shownAllNote}>View All Note</button>
             </header>
-
+            {!visibleNewNote && !viewNotes &&
+                <p className='notification_message'>You have {allNotes.length} notes</p>
+            }
             {visibleNewNote &&
                 <Inputs
                     title={title}
@@ -113,9 +117,8 @@ const Notes = () => {
                         icon={<GoMoveToTop />}
                         shape="square"
                         style={{ insetInlineEnd: 25 }}
-                        visibilityHeight={100}//ще работи ако е на целия екран а не на компонент
                     />
-                 
+
                 </section>
             }
         </main>

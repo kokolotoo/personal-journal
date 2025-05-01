@@ -119,3 +119,9 @@
     white-space: pre-line;
 }
 
+.notification_message{
+    color: rgb(203, 247, 123);
+    font-size: 1.5em;
+    text-align: center;
+    margin-top: 3em;
+}
