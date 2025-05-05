@@ -56,7 +56,10 @@ const Notes = () => {
                 <button onClick={shownAllNote}>View All Note</button>
             </header>
             {!visibleNewNote && !viewNotes &&
+            allNotes.length > 0 ?
                 <p className='notification_message'>You have {allNotes.length} notes</p>
+                :
+                <p className='notification_message'>Loading notes...</p>
             }
             {visibleNewNote &&
                 <Inputs
