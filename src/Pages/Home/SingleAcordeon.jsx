@@ -2,8 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import './style.css';
 
-const SingleAcordeon = ({ title, children }) => {
-    const [isOpen, setIsOpen] = useState(false);
+const SingleAcordeon = ({ title, children, isOpen, onToggle }) => {
     const contentRef = useRef(null);
     const [height, setHeight] = useState('0px');
 
@@ -16,7 +15,7 @@ const SingleAcordeon = ({ title, children }) => {
     return (
         <div>
             <section
-                onClick={() => setIsOpen(prev => !prev)}
+                onClick={onToggle}
                 className='acordeon'
                 style={{ backgroundColor: isOpen ? 'rgb(39, 60, 57)' : '' }}
             >

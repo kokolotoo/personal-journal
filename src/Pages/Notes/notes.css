@@ -118,6 +118,9 @@
 .single_note_container>p {
     font-size: 1.4em;
     white-space: pre-line;
+    width: 76ch;
+    max-width: 99%;
+    margin: 0 auto
 }
 
 .notification_message{

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './notes.css'
 import xssProtect from '@/Utils/xssProtect';
 import useFunction from '@/hooks/useFunction';
@@ -8,6 +8,7 @@ import { FloatButton } from 'antd';
 import { GoMoveToTop } from "react-icons/go";
 
 const Notes = () => {
+    const [openAccordionId, setOpenAccordionId] = useState(null);
 
     const {
         newNote, setNewNote, title, setTitle,
@@ -56,10 +57,7 @@ const Notes = () => {
                 <button onClick={shownAllNote}>View All Note</button>
             </header>
             {!visibleNewNote && !viewNotes &&
-            allNotes.length > 0 ?
                 <p className='notification_message'>You have {allNotes.length} notes</p>
-                :
-                <p className='notification_message'>Loading notes...</p>
             }
             {visibleNewNote &&
                 <Inputs
@@ -97,6 +95,10 @@ const Notes = () => {
                                 ) : (
                                     <SingleAcordeon
                                         title={note.title}
+                                        isOpen={openAccordionId === note.id}
+                                        onToggle={() =>
+                                            setOpenAccordionId(prevId => prevId === note.id ? null : note.id)
+                                        }
                                     >
                                         <div className='single_note_container'>
                                             <aside > {new Date(note.createdAt.seconds * 1000).toLocaleString()}</aside>
