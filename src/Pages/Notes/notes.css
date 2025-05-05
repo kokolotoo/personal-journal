@@ -108,10 +108,11 @@
     color: aliceblue;
 }
 
-.single_note_container>h3 {
+.single_note_container>aside {
     text-align: start;
     padding: 1em;
     color: rgb(69, 245, 157);
+    font-size: 0.9em;
 }
 
 .single_note_container>p {
@@ -125,3 +126,4 @@
     text-align: center;
     margin-top: 3em;
 }
+

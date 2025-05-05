@@ -20,7 +20,7 @@ const SingleAcordeon = ({ title, children }) => {
                 className='acordeon'
                 style={{ backgroundColor: isOpen ? 'rgb(39, 60, 57)' : '' }}
             >
-                <p>{title}</p>
+                <p className='note_title'>{title}</p>
                 {isOpen ? <FiChevronUp size={24} /> : <FiChevronDown size={24} />}
             </section>
 

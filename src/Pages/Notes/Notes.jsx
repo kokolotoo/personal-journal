@@ -93,10 +93,10 @@ const Notes = () => {
                                     </div>
                                 ) : (
                                     <SingleAcordeon
-                                        title={new Date(note.createdAt.seconds * 1000).toLocaleString()}
+                                        title={note.title}
                                     >
                                         <div className='single_note_container'>
-                                            <h3 dangerouslySetInnerHTML={{ __html: xssProtect(note.title) }} />
+                                            <aside > {new Date(note.createdAt.seconds * 1000).toLocaleString()}</aside>
                                             <p dangerouslySetInnerHTML={{ __html: xssProtect(note.body) }} />
                                             <div className='edited_buttons'>
                                                 <button onClick={() => deleteNote(note.id)}>Delete</button>
