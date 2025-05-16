@@ -25,7 +25,7 @@ const HomeWithLogin = () => {
     return (
 
         <ul className={styles.login_container}>
-            <li>To-Do List</li>
+            <li><Link to='/task'>Task List</Link></li>
             <li><Link to='/notes'>Notes</Link></li>
             <li><Link to='/calendar'>Calendar</Link></li>
             <li onClick={handleExit}>Exit</li>

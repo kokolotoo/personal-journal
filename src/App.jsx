@@ -9,7 +9,8 @@ const Login = lazy(() => import('../src/Pages/Login/loginPage'))
 const Registration = lazy(() => import('../src/Pages/Registration/Registration'))
 const ForgotPage = lazy(() => import('../src/Pages/Forgot-page/ForgotPage'))
 const Notes = lazy(() => import('../src/Pages/Notes/Notes'))
-const Calendar = lazy(() => import('../src/Pages/Calendar/Calendar'))
+const Calendar = lazy(() => import('../src/Pages/Calendar/Calendar'));
+const Task = lazy(() => import('../src/Pages/Task/Task'));
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
             <Route path='/forgot-page' element={<ForgotPage />} />
             <Route path='/notes' element={<Notes />} />
             <Route path='/calendar' element={<Calendar />} />
+            <Route path='/task' element={<Task />} />
 
           </Route>
         </Routes>

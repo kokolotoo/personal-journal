@@ -1,0 +1,20 @@
+.task_container{
+    height: 90vh;
+    overflow: auto;
+}
+
+.addForm{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.formInput{
+    width: 50%;
+    max-width: 30em;
+}
+
+.addButton{
+    width: 4em;
+}
