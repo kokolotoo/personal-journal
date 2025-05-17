@@ -19,8 +19,8 @@
     align-items: center;
 }
 
-button,
-input {
+.button,
+.input {
     font-size: 1.3em;
     padding: 0.4rem;
     width: 36ch;

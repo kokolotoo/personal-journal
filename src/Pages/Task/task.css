@@ -1,20 +1,74 @@
-.task_container{
+.task_container {
     height: 90vh;
     overflow: auto;
 }
 
-.addForm{
+.addForm {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    gap: 0.5em;
     margin-top: 1em;
 }
 
-.formInput{
+.formInput {
     width: 50%;
     max-width: 30em;
+    height: 2em;
 }
 
-.addButton{
+.addButton {
     width: 4em;
+}
+
+.tasks_list {
+    width: 98%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 80vh;
+    overflow: auto;
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5em;
+    border: 1px solid rgb(66, 66, 66);
+    border-bottom: none;
+    padding: 1.2em;
+}
+
+.tasks_list>legend {
+    color: rgb(120, 136, 136);
+    padding: 1em;
+}
+
+.single_task{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+
+.single_task :nth-child(2){
+    flex: 1;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.3em;
+}
+
+.check{
+    text-decoration: line-through;
+    color: red;
+}
+
+input[type="checkbox"] {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 1em;
+}
+
+.delete{
+    font-size: 2em;
+    background-color: transparent;
+    border: none;
+    color: rgb(192, 110, 100);
 }

@@ -38,13 +38,14 @@ const ForgotPage = () => {
       <form onSubmit={checkForPassword}>
         <label htmlFor="email">Enter email:</label>
         <input
+          className={styles.input}
           type="email"
           placeholder='email'
           value={searchEmail}
           onChange={(e) => setSearchEmail(e.target.value)}
           required
         />
-        <button>Send</button>
+        <button className={styles.button}>Send</button>
       </form>
 
       <section className={styles.links}>
