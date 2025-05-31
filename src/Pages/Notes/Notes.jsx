@@ -3,12 +3,13 @@ import './notes.css'
 import xssProtect from '@/Utils/xssProtect';
 import useFunction from '@/hooks/useFunction';
 import Inputs from './Inputs';
-import SingleAcordeon from '../Home/SingleAcordeon';
+import SingleAcordeon from './SingleAcordeon';
 import { FloatButton } from 'antd';
 import { GoMoveToTop } from "react-icons/go";
 
 const Notes = () => {
     const [openAccordionId, setOpenAccordionId] = useState(null);
+    
 
     const {
         newNote, setNewNote, title, setTitle,
