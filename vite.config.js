@@ -9,7 +9,7 @@ export default defineConfig({
     react(),
     viteCompression({ algorithm: 'gzip', ext: '.gz' }),
     viteCompression({ algorithm: 'brotliCompress', ext: '.br' }),
-    tailwindcss(),
+   tailwindcss(),
   ],
   build: {
     sourcemap: false,
