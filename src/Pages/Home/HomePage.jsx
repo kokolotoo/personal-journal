@@ -18,6 +18,10 @@ const HomePage = () => {
           <p>You can create a to-do list.</p>
           <p>You can edit, delete, and add new.</p>
           <p>This application serves as your personal diary.</p>
+          <p className='text-center text-2xl font-bold text-red-500'>
+            To get started, please log in or register.
+          </p>
+          <p>Enjoy your journaling experience!</p>
         </article>
       }
 
