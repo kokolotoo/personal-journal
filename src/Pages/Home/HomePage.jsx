@@ -14,12 +14,10 @@ const HomePage = () => {
         :
         <article>
           <h2>Welcomme to your personal Journal</h2>
-          <p>You can create a to-do list.</p>
-          <p>You can edit, delete, and add new.</p>
-          <p>This application serves as your personal diary.</p>
-          <p className='text-center text-2xl font-bold text-red-500'>
-            To get started, please log in or register.
-          </p>
+          <p>This is a simple journal application.</p>
+          <p>Here you can write your thoughts, feelings, and experiences.</p>
+          <p>Feel free to express yourself and keep track of your daily life.</p>
+          <p>To get started, please log in or register.</p>
           <p>Enjoy your journaling experience!</p>
         </article>
       }

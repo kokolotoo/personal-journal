@@ -23,6 +23,8 @@ const useFunction = () => {
         setEditBody(note.body);
     };
 
+
+    
     const saveEditedNote = async () => {
         try {
             const noteRef = doc(db, 'Users', user.id, 'Notes', editNoteId);
@@ -51,6 +53,8 @@ const useFunction = () => {
         }
     };
 
+
+
     const deleteNote = async (id) => {
         try {
             const noteRef = doc(db, 'Users', user.id, 'Notes', id);
@@ -61,6 +65,7 @@ const useFunction = () => {
             console.log(err.message);
         }
     };
+
 
 
     const fetchNotes = useCallback(async () => {
@@ -77,6 +82,8 @@ const useFunction = () => {
             console.log(err.message);
         }
     }, [user?.id]);  // зависи само от user.id
+
+
 
     const addNote = async () => {
         if (title.trim() === '' || newNote.trim() === '') return

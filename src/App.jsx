@@ -11,6 +11,7 @@ const ForgotPage = lazy(() => import('../src/Pages/Forgot-page/ForgotPage'))
 const Notes = lazy(() => import('../src/Pages/Notes/Notes'))
 const Calendar = lazy(() => import('../src/Pages/Calendar/Calendar'));
 const Task = lazy(() => import('../src/Pages/Task/Task'));
+const Discusion = lazy(() => import('../src/Pages/Discusion/DiscusionPage'));
 
 function App() {
 
@@ -28,7 +29,7 @@ function App() {
             <Route path='/notes' element={<Notes />} />
             <Route path='/calendar' element={<Calendar />} />
             <Route path='/task' element={<Task />} />
-
+            <Route path='/discusion' element={<Discusion />} />
           </Route>
         </Routes>
       </Suspense>

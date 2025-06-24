@@ -33,7 +33,7 @@
 }
 
 article {
-    height: 90vh;
+    color: rgb(197, 235, 123);
     display: flex;
     flex-direction: column;
     justify-content: center;
