@@ -1,4 +1,4 @@
-import style from './DiscusionPage.module.css';
+import style from './discusionPage.module.css';
 import { useState, useEffect, useContext } from 'react';
 import DataContext from '@/Context/DataContext';
 
