@@ -1,53 +1,93 @@
 import style from './discusionPage.module.css';
 import { useState, useEffect, useContext } from 'react';
-import DataContext from '@/Context/DataContext';
+import useTopicsFunction from '../../hooks/useTopicsFunction';
+import { ComponentModal } from './modal/ComponentModal';
+import { Link } from 'react-router-dom';
+import { LuMessageCircleMore } from "react-icons/lu";
 
 const DiscusionPage = () => {
-    const { user } = useContext(DataContext);
-    const [thems, setThems] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [newTopic, setNewTopic] = useState({
-        title: '',
-        text: '',
-        author: user ? user.name : 'Anonymous',
-        createdAt: new Date().toISOString(),
-        creator: user ? user.id : null,
-        locked: false,
-        comments: []
-    });
+
+    const {
+        contextHolder,
+        isModalOpen,
+        setIsModalOpen,
+        loading,
+        allTopics,
+        newTopic,
+        setNewTopic,
+        fetchTopics,
+        createNewTopic,
+        closeModal,
+        user
+    } = useTopicsFunction();
 
     useEffect(() => {
         //console.log('user', user);
-
-
+        fetchTopics();
     }, []);
 
-    const createNewTopic = async (e) => {
-        e.preventDefault();
-
-    }
 
     return (
         <div className={style.container}>
+            {contextHolder}
 
-            <form className={style.form} onSubmit={createNewTopic}>
-                <fieldset className={style.newTopic}>
-                    <legend className={style.legend}>New topic</legend>
-                    <input type="text" placeholder='Title'
-                        value={newTopic.title}
-                        onChange={(e) => setNewTopic({ ...newTopic, title: e.target.value })}
-                    />
-                    <textarea name="new topic" placeholder='Text' rows='3'
-                        value={newTopic.text}
-                        onChange={(e) => setNewTopic({ ...newTopic, text: e.target.value })}
-                    ></textarea>
-                    <button type='submit' className={style.submitBtn}>Create</button>
-                </fieldset>
-            </form>
+            <button
+                onClick={() => setIsModalOpen(true)}
+                className={style.createTopicButton}
+            >
+                Create New Topic
+            </button>
+
+            <ComponentModal
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
+                setNewTopic={setNewTopic}
+                newTopic={newTopic}
+                createNewTopic={createNewTopic}
+                closeModal={closeModal}
+                style={style}
+            />
+
+
+
+            {
+                loading ? (
+                    <div className={style.loading}>
+                        <p>Loading topics...</p>
+                    </div>
+                ) :
+                    allTopics.length > 0 ? (
+                        <div className={style.topicsContainer}>
+                            {
+                                allTopics.map((topic) => (
+
+
+                                    <Link
+                                        to={`/topic/${topic.id}`}
+                                        key={topic.id}>
+                                        <div className={style.topicCard}>
+                                            <p className={style.topicTitle}>{topic.title}</p>
+                                            <p>
+                                                <LuMessageCircleMore />
+                                                <b className={style.number_comments}>{topic.comments ? topic.comments.length : 0}</b> 
+                                            </p>
+
+                                        </div>
+
+
+                                    </Link>
+                                ))
+                            }
+                        </div>
+                    ) : (
+                        <div className={style.noTopics}>
+                            <p>No topics available. </p>
+                            <p>Start the discussion by creating a new topic!</p>
+                        </div>
+                    )}
 
         </div>
-    )
+    );
 }
 
 

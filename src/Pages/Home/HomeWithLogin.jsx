@@ -28,7 +28,7 @@ const HomeWithLogin = () => {
             <li><Link to='/task'>Task List</Link></li>
             <li><Link to='/notes'>Notes</Link></li>
             <li><Link to='/calendar'>Calendar</Link></li>
-            <li><Link to='/discusion'>Topics</Link></li>
+            <li><Link to='/topic'>Topics</Link></li>
             <li onClick={handleExit}>Exit</li>
         </ul>
 
