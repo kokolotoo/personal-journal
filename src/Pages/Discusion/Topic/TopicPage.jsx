@@ -8,7 +8,7 @@ import { SlDislike } from "react-icons/sl";
 import { MdDeleteOutline } from "react-icons/md";
 import { MdOutlineLock } from "react-icons/md";
 import { TiLockOpenOutline } from "react-icons/ti";
-import { doc, setDoc, getDocs, collection, query, orderBy, deleteDoc } from "firebase/firestore";
+import { doc, setDoc, getDocs, collection, query, orderBy, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from '@/hooks/firebase_config';
 
 const TopicPage = () => {
@@ -38,9 +38,59 @@ const TopicPage = () => {
                 await deleteDoc(topicRef);
                 console.log('Topic deleted successfully');
                 navigate('/topic');
+                fetchTopics();
             } catch (error) {
                 console.error("Error deleting topic: ", error);
             }
+        }
+    }
+
+    const lockUnlockTopic = async (topicId, lock) => {
+        if (confirm(`Are you sure you want to ${lock ? 'lock' : 'unlock'} this topic?`)) {
+            try {
+                const topicRef = doc(db, 'Topics', topicId);
+                await setDoc(topicRef, { locked: lock }, { merge: true });
+                console.log(`Topic ${lock ? 'unlocked' : 'locked'} successfully`);
+                fetchTopics();
+            } catch (error) {
+                console.error("Error updating topic lock status: ", error);
+            }
+        }
+    }
+
+    const likeUnlikeTopic = async (topicId, action) => {
+
+        const topicRef = doc(db, 'Topics', topicId);
+
+        const checkforLike = (row) => {
+            const action = row === 'like' ? 'likes' : 'dislikes';
+            return currentTopic[action].filter(current => current !== user.id);
+           
+        }
+
+        const likesArray = Array.isArray(currentTopic.likes) ? currentTopic.likes : [];
+        const dislikesArray = Array.isArray(currentTopic.dislikes) ? currentTopic.dislikes : [];
+
+        const updatedLikes = action === 'like'
+            ? [...new Set([...likesArray, user.id])]
+            : likesArray.filter(id => id !== user.id);
+
+        const updatedDislikes = action === 'dislike'
+            ? [...new Set([...dislikesArray, user.id])]
+            : dislikesArray.filter(id => id !== user.id);
+
+
+        try {
+            await updateDoc(topicRef, {
+                likes: updatedLikes,
+                dislikes: updatedDislikes,
+
+            }, { merge: true });
+
+            console.log(`Topic ${action}d successfully`);
+            fetchTopics();
+        } catch (error) {
+            console.error("Error updating topic likes/dislikes: ", error);
         }
     }
 
@@ -66,10 +116,22 @@ const TopicPage = () => {
 
                     <footer className={styles.footer}>
 
-                        <p><SlLike /> {currentTopic.likes.length}</p>
-                        <p><SlDislike />  {currentTopic.dislikes.length}</p>
+                        <button
+                            className={styles.likeBtn}
+                            onClick={() => likeUnlikeTopic(currentTopic.id, 'like')}
+                        ><SlLike /> {currentTopic.likes.length}</button>
 
-                        <button className={styles.commentBtn}>Comment</button>
+                        <button
+                            className={styles.likeBtn}
+                            onClick={() => likeUnlikeTopic(currentTopic.id, 'dislike')}
+                        ><SlDislike />  {currentTopic.dislikes.length}</button>
+
+                        {currentTopic.locked ?
+                            <span className={styles.locked}>Locked</span>
+                            :
+                            <button className={styles.commentBtn}>Comment</button>
+                        }
+
 
                         {currentTopic.authorId === user.id &&
                             <div className={styles.buttons}>
@@ -84,17 +146,19 @@ const TopicPage = () => {
 
                                 {
                                     currentTopic.locked ?
-
                                         <MdOutlineLock
                                             className={styles.lockBtn}
                                             title='Unlock Topic'
+                                            onClick={() => lockUnlockTopic(currentTopic.id, false)}
                                         />
                                         :
                                         <TiLockOpenOutline
                                             className={styles.lockBtn}
                                             title='Lock Topic'
+                                            onClick={() => lockUnlockTopic(currentTopic.id, true)}
                                         />
                                 }
+
 
                             </div>
                         }

@@ -36,7 +36,9 @@
 
 .main h4 {
     letter-spacing: 1px;
-    white-space: pre-line
+    white-space: pre-line;
+    margin-bottom: 0.7em;
+    font-size: 1.1em;
 }
 
 .backBtn {
@@ -54,7 +56,7 @@
     position: absolute;
     bottom: 0;
     right: 0.5em;
-    font-size: 0.7em;
+    font-size: 0.8em;
     color: rgb(129, 153, 145);
 }
 
@@ -92,7 +94,18 @@
 }
 
 .commentBtn {
-    color: rgb(0, 255, 0);
+    color: rgb(142, 161, 168);
     background-color: transparent;
     border: none;
+}
+
+.likeBtn {
+    color: rgb(202, 202, 201);
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+}
+
+.locked {
+    color: rgb(255, 0, 0);
 }
