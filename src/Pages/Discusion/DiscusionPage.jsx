@@ -1,5 +1,5 @@
 import style from './discusionPage.module.css';
-import { useState, useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import useTopicsFunction from '../../hooks/useTopicsFunction';
 import { ComponentModal } from './modal/ComponentModal';
 import { Link } from 'react-router-dom';
@@ -48,8 +48,6 @@ const DiscusionPage = () => {
                 style={style}
             />
 
-
-
             {
                 loading ? (
                     <div className={style.loading}>
@@ -61,7 +59,6 @@ const DiscusionPage = () => {
                             {
                                 allTopics.map((topic) => (
 
-
                                     <Link
                                         to={`/topic/${topic.id}`}
                                         key={topic.id}>
@@ -69,11 +66,10 @@ const DiscusionPage = () => {
                                             <p className={style.topicTitle}>{topic.title}</p>
                                             <p>
                                                 <LuMessageCircleMore />
-                                                <b className={style.number_comments}>{topic.comments ? topic.comments.length : 0}</b> 
+                                                <b className={style.number_comments}>{topic.comments ? topic.comments.length : 0}</b>
                                             </p>
-
+                                            <span className={style.authorInfo}>{topic.author}</span>
                                         </div>
-
 
                                     </Link>
                                 ))
@@ -84,7 +80,8 @@ const DiscusionPage = () => {
                             <p>No topics available. </p>
                             <p>Start the discussion by creating a new topic!</p>
                         </div>
-                    )}
+                    )
+            }
 
         </div>
     );
