@@ -18,7 +18,12 @@
     margin-bottom: 1em;
 }
 
-.header p b {
+.header :last-child{
+    color: rgb(175, 173, 173);
+    font-size: 0.9em;
+}
+
+.header :first-child>b {
     letter-spacing: 1px;
     color: rgb(231, 255, 184);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;

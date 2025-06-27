@@ -26,7 +26,7 @@ const TopicPage = () => {
         if (allTopics.length > 0) {
             const topic = allTopics.find(topic => topic.id === topicId);
             setCurrentTopic(topic);
-            console.log(topic);
+            //console.log(topic);
         }
     }, [allTopics, topicId]);
 
@@ -64,30 +64,30 @@ const TopicPage = () => {
 
         const checkforLike = (row) => {
             const action = row === 'like' ? 'likes' : 'dislikes';
-            return currentTopic[action].filter(current => current !== user.id);
-           
-        }
+            if (currentTopic[action].includes(user.id)) {
+                return currentTopic[action].filter(current => current !== user.id);
+            } else {
+                return [...new Set([...currentTopic[action], user.id])];
+            }
+        };
 
         const likesArray = Array.isArray(currentTopic.likes) ? currentTopic.likes : [];
         const dislikesArray = Array.isArray(currentTopic.dislikes) ? currentTopic.dislikes : [];
 
         const updatedLikes = action === 'like'
-            ? [...new Set([...likesArray, user.id])]
+            ? [...new Set(checkforLike('like'))]
             : likesArray.filter(id => id !== user.id);
 
         const updatedDislikes = action === 'dislike'
-            ? [...new Set([...dislikesArray, user.id])]
+            ? checkforLike('dislike')
             : dislikesArray.filter(id => id !== user.id);
-
 
         try {
             await updateDoc(topicRef, {
                 likes: updatedLikes,
                 dislikes: updatedDislikes,
-
             }, { merge: true });
 
-            console.log(`Topic ${action}d successfully`);
             fetchTopics();
         } catch (error) {
             console.error("Error updating topic likes/dislikes: ", error);
@@ -132,7 +132,6 @@ const TopicPage = () => {
                             <button className={styles.commentBtn}>Comment</button>
                         }
 
-
                         {currentTopic.authorId === user.id &&
                             <div className={styles.buttons}>
 
@@ -158,7 +157,6 @@ const TopicPage = () => {
                                             onClick={() => lockUnlockTopic(currentTopic.id, true)}
                                         />
                                 }
-
 
                             </div>
                         }
