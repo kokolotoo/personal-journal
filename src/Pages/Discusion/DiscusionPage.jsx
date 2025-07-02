@@ -39,6 +39,7 @@ const DiscusionPage = () => {
             </button>
 
             <ComponentModal
+                modalTitle="New Topic"
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
                 setNewTopic={setNewTopic}

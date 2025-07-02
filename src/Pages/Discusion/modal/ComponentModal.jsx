@@ -2,7 +2,7 @@ import { Modal } from 'antd';
 
 export const ComponentModal = ({
     isModalOpen,
-    setIsModalOpen,
+    modalTitle,
     newTopic,
     setNewTopic,
     createNewTopic,
@@ -10,9 +10,9 @@ export const ComponentModal = ({
     style
 }) => {
 
-  return (
+    return (
         <Modal
-            title="New Topic"
+            title={modalTitle}
             closable={{ 'aria-label': 'Custom Close Button' }}
             open={isModalOpen}
             onOk={createNewTopic}

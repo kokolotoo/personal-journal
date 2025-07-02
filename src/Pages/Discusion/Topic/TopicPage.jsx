@@ -3,8 +3,6 @@ import useTopicsFunction from '@/hooks/useTopicsFunction';
 import { useParams } from "react-router-dom";
 import styles from './topic.module.css';
 import { useNavigate } from 'react-router-dom';
-import { doc, setDoc, getDocs, collection, query, orderBy, deleteDoc, updateDoc } from "firebase/firestore";
-import { db } from '@/hooks/firebase_config';
 import TopicFooter from './Footer/TopicFooter';
 
 const TopicPage = () => {
@@ -25,7 +23,7 @@ const TopicPage = () => {
         }
     }, [allTopics, topicId]);
 
-
+         
 
     return (
         <div className={styles.container}>
