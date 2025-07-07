@@ -10,6 +10,7 @@ const useTopicsFunction = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [loading, setLoading] = useState(true);
     const [allTopics, setAllTopics] = useState([]);
+    const [newComment, setNewComment] = useState('');
     const [newTopic, setNewTopic] = useState({
         title: '',
         text: '',
@@ -30,9 +31,6 @@ const useTopicsFunction = () => {
             const querySnapshot = await getDocs(topicsQuery);
             const topicsList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setAllTopics(topicsList);
-            //console.log('topicsList', topicsList);
-
-            setLoading(false);
         } catch (error) {
             console.error("Error fetching topics: ", error);
         } finally {
@@ -90,6 +88,41 @@ const useTopicsFunction = () => {
         });
     };
 
+    const addNewComment = async (currentTopic) => {
+      
+        if (!newComment.trim()) {
+            alert('Comment cannot be empty');
+            return;
+        }
+        const comment = {
+            text: newComment,
+            user: user.name,
+            userId: user.id,
+            date: new Date().toLocaleString().replace(/[:.]/g, "-")
+        }
+        const updatedComments = [...currentTopic.comments, comment];
+        const updatedTopic = {
+            ...currentTopic,
+            comments: updatedComments,
+        }
+
+
+        try {
+            const topicRef = doc(db, 'Topics', currentTopic.id);
+            await setDoc(topicRef, updatedTopic, { merge: true });
+            // Optionally, you can also fetch the updated topic or update the state in the parent component
+           
+        } catch (error) {
+            console.error("Error adding comment: ", error);
+            alert('Failed to add comment');
+        } finally {
+            setNewComment('');
+            fetchTopics();
+        }
+        success()
+    }
+
+
     return {
         contextHolder,
         isModalOpen,
@@ -103,7 +136,10 @@ const useTopicsFunction = () => {
         closeModal,
         success,
         errorMessage,
-        user
+        user,
+        setNewComment,
+        newComment,
+        addNewComment,
     };
 
 

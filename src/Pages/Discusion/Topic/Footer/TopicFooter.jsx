@@ -8,11 +8,11 @@ import { TiLockOpenOutline } from "react-icons/ti";
 import { FaRegCommentDots } from "react-icons/fa6";
 import useTopicsFunction from '@/hooks/useTopicPageFunction';
 
-const TopicFooter = ({ currentTopic, user, fetchTopics }) => {
+const TopicFooter = ({ currentTopic, user, fetchTopics, setCommentFormVisible }) => {
 
     const { lockUnlockTopic,
         likeUnlikeTopic,
-        handleDeleteTopic, contextHolder } = useTopicsFunction(currentTopic, user, fetchTopics, );
+        handleDeleteTopic, contextHolder } = useTopicsFunction(currentTopic, user, fetchTopics,);
 
 
     return (
@@ -31,7 +31,11 @@ const TopicFooter = ({ currentTopic, user, fetchTopics }) => {
             {currentTopic.locked ?
                 <span className={styles.locked}>Locked</span>
                 :
-                <button className={styles.commentBtn}> <FaRegCommentDots /> Comment</button>
+                <button
+                    className={styles.commentBtn}
+                    onClick={() =>  setCommentFormVisible(prev => !prev)}
+                    title='Add Comment'
+                > <FaRegCommentDots /> Comment</button>
             }
 
             {currentTopic.authorId === user.id &&
@@ -59,6 +63,7 @@ const TopicFooter = ({ currentTopic, user, fetchTopics }) => {
                                 onClick={() => lockUnlockTopic(currentTopic.id, true)}
                             />
                     }
+
 
                 </div>
             }

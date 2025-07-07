@@ -4,11 +4,15 @@ import { useParams } from "react-router-dom";
 import styles from './topic.module.css';
 import { useNavigate } from 'react-router-dom';
 import TopicFooter from './Footer/TopicFooter';
+import AddComment from './Comment/AddComment';
+import AllComments from './Comment/AllComments';
 
 const TopicPage = () => {
     const { topicId } = useParams();
-    const { allTopics, fetchTopics, user } = useTopicsFunction();
+    const { allTopics, fetchTopics, user, contextHolder } = useTopicsFunction();
     const [currentTopic, setCurrentTopic] = useState(null);
+    const [commentFormVisible, setCommentFormVisible] = useState(false);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,10 +27,10 @@ const TopicPage = () => {
         }
     }, [allTopics, topicId]);
 
-         
 
     return (
         <div className={styles.container}>
+            {contextHolder}
             {currentTopic ? (
                 <section className={styles.topicSection}>
                     <button className={styles.backBtn}
@@ -40,21 +44,26 @@ const TopicPage = () => {
 
                     <main className={styles.main}>
                         <h4>{currentTopic.text}</h4>
-                        {
-                            currentTopic.comments.length > 0 &&
-                            <span
-                                className={styles.textComments}
-                            > {currentTopic.comments.length} : Comments </span>
-                        }
                     </main>
 
                     <TopicFooter
                         currentTopic={currentTopic}
                         user={user}
                         fetchTopics={fetchTopics}
+                        setCommentFormVisible={setCommentFormVisible}
                     />
 
 
+                    <AddComment
+                        currentTopic={currentTopic}
+                        user={user}
+                        commentFormVisible={commentFormVisible}
+                        setCommentFormVisible={setCommentFormVisible}
+                    />
+
+                    <AllComments
+                        currentTopic={currentTopic}
+                    />
                 </section>
             ) : (
                 <p>Loading topic...</p>
