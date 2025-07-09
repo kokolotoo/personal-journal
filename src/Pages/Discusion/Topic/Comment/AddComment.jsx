@@ -1,26 +1,24 @@
+import styles from '../topic.module.css';
 
-import styles from '../topic.module.css'
-import useTopicsFunction from '@/hooks/useTopicsFunction';
+const AddComment = ({
+    currentTopic,
+    commentFormVisible,
+    setCommentFormVisible,
+    addNewComment,
+    newComment,
+    setNewComment
+}) => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        addNewComment(currentTopic, newComment);
+        setCommentFormVisible(false);
+        setNewComment('');
+    };
 
-const AddComment = (props) => {
-
-    const { currentTopic, setCommentFormVisible, commentFormVisible } = props;
-    const { addNewComment, newComment, setNewComment } = useTopicsFunction();
-
-
+    if (!commentFormVisible) return null;
 
     return (
-        <form onSubmit={
-            (e) => {
-                e.preventDefault();
-                addNewComment(currentTopic);
-                setCommentFormVisible(false);
-            }
-        }
-            className={
-                commentFormVisible ? styles.commentForm : styles.hiddenForm
-            }
-        >
+        <form onSubmit={handleSubmit} className={styles.commentForm}>
             <textarea
                 rows={3}
                 placeholder='Add a comment...'
@@ -28,18 +26,20 @@ const AddComment = (props) => {
                 onChange={(e) => setNewComment(e.target.value)}
                 required
             />
+            <button type='submit' className={styles.postBtn}>Post</button>
             <button
-                type='submit'
-                className={styles.postBtn}
-            >Post</button>
-
-            <button
-                className={styles.cancelBtn}
                 type='button'
-                onClick={() => setCommentFormVisible(false)}
-            >Cancel</button>
+                className={styles.cancelBtn}
+                onClick={() => {
+                    setCommentFormVisible(false);
+                    setNewComment('');
+                }}
+            >
+                Cancel
+            </button>
         </form>
-    )
-}
+    );
+};
 
-export default AddComment
+export default AddComment;
+

@@ -83,18 +83,19 @@ const useTopicsFunction = () => {
         }
     }
 
-    const addNewComment = async (currentTopic) => {
-        if (!newComment.trim()) {
+    const addNewComment = async (currentTopic, commentText) => {
+        if (!commentText.trim()) {
             alert('Comment cannot be empty');
             return;
         }
         const comment = {
-            text: newComment,
-            user: user.name,
-            userId: user.id,
+            text: commentText,
+            user: user?.name || 'Anonymous',
+            userId: user?.id || null,
             date: new Date().toLocaleString().replace(/[:.]/g, "-")
         };
-        const updatedComments = [...currentTopic.comments, comment];
+
+        const updatedComments = [...(currentTopic.comments || []), comment];
         const updatedTopic = {
             ...currentTopic,
             comments: updatedComments,
@@ -104,7 +105,6 @@ const useTopicsFunction = () => {
             const topicRef = doc(db, 'Topics', currentTopic.id);
             await setDoc(topicRef, updatedTopic, { merge: true });
 
-            // Локален update, вместо fetchTopics (по избор)
             setAllTopics(prev =>
                 prev.map(topic =>
                     topic.id === currentTopic.id ? updatedTopic : topic
@@ -116,10 +116,10 @@ const useTopicsFunction = () => {
             console.error("Error adding comment: ", error);
             setErrorMessage('Failed to add comment');
         } finally {
-            setNewComment('');
             fetchTopics();
         }
-    }
+    };
+    
 
     const closeModal = () => {
         setIsModalOpen(false);
