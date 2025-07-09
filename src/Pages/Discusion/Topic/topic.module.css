@@ -1,10 +1,10 @@
 .container {
-    min-height: 90vh;
     width: 100%;
     max-width: 1000px;
     margin: auto;
     margin-top: 1em;
-
+    height: 89vh;
+  
 }
 
 .header {
@@ -152,6 +152,12 @@
     display: none;
 }
 
+.commentsContainer{
+    max-height: 60vh;
+    overflow: auto;
+    margin: 2em ;
+}
+
 .commentsList {
     display: flex;
     flex-direction: column;
@@ -169,7 +175,7 @@
 
 .commentContent {
     white-space: pre-line;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     border-bottom: 0.3px solid rgba(128, 128, 128, 0.253);
     padding: 0.3em;
 }

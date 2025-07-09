@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { doc, setDoc, getDocs, collection, query, orderBy } from "firebase/firestore";
 import { db } from '@/hooks/firebase_config';
 import DataContext from '@/Context/DataContext';
@@ -7,6 +7,11 @@ import { message } from 'antd';
 const useTopicsFunction = () => {
     const { user } = useContext(DataContext);
     const [messageApi, contextHolder] = message.useMessage();
+
+    // ✅ Flags for safe message rendering
+    const [successMessage, setSuccessMessage] = useState(null);
+    const [errorMessage, setErrorMessage] = useState(null);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [loading, setLoading] = useState(true);
     const [allTopics, setAllTopics] = useState([]);
@@ -23,6 +28,25 @@ const useTopicsFunction = () => {
         dislikes: [],
     });
 
+    useEffect(() => {
+        if (successMessage) {
+            messageApi.open({
+                type: 'success',
+                content: successMessage,
+            });
+            setSuccessMessage(null);
+        }
+    }, [successMessage, messageApi]);
+
+    useEffect(() => {
+        if (errorMessage) {
+            messageApi.open({
+                type: 'error',
+                content: errorMessage,
+            });
+            setErrorMessage(null);
+        }
+    }, [errorMessage, messageApi]);
 
     const fetchTopics = async () => {
         try {
@@ -35,15 +59,12 @@ const useTopicsFunction = () => {
             console.error("Error fetching topics: ", error);
         } finally {
             setLoading(false);
-
         }
-
     }
-
 
     const createNewTopic = async () => {
         if (!newTopic.title || !newTopic.text) {
-            alert('Title and text are required');
+            setErrorMessage('Error creating topic. Please try again.');
             return;
         }
         try {
@@ -52,44 +73,17 @@ const useTopicsFunction = () => {
                 ...newTopic,
                 createdAt: new Date().toISOString(),
             });
-            success();
+            setSuccessMessage('New topic created successfully');
         } catch (error) {
             console.error("Error creating new topic: ", error);
-            errorMessage();
+            setErrorMessage('Error creating topic. Please try again.');
         } finally {
-            closeModal()
-            fetchTopics()
+            closeModal();
+            fetchTopics();
         }
-
     }
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setNewTopic((prev) => {
-            return {
-                ...prev,
-                title: '',
-                text: '',
-            }
-        })
-    }
-
-    const success = () => {
-        messageApi.open({
-            type: 'success',
-            content: 'New topic created successfully',
-        });
-    };
-
-    const errorMessage = () => {
-        messageApi.open({
-            type: 'error',
-            content: 'Error creating topic. Please try again.',
-        });
-    };
 
     const addNewComment = async (currentTopic) => {
-      
         if (!newComment.trim()) {
             alert('Comment cannot be empty');
             return;
@@ -99,29 +93,42 @@ const useTopicsFunction = () => {
             user: user.name,
             userId: user.id,
             date: new Date().toLocaleString().replace(/[:.]/g, "-")
-        }
+        };
         const updatedComments = [...currentTopic.comments, comment];
         const updatedTopic = {
             ...currentTopic,
             comments: updatedComments,
-        }
-
+        };
 
         try {
             const topicRef = doc(db, 'Topics', currentTopic.id);
             await setDoc(topicRef, updatedTopic, { merge: true });
-            // Optionally, you can also fetch the updated topic or update the state in the parent component
-           
+
+            // Локален update, вместо fetchTopics (по избор)
+            setAllTopics(prev =>
+                prev.map(topic =>
+                    topic.id === currentTopic.id ? updatedTopic : topic
+                )
+            );
+
+            setSuccessMessage('Comment added successfully');
         } catch (error) {
             console.error("Error adding comment: ", error);
-            alert('Failed to add comment');
+            setErrorMessage('Failed to add comment');
         } finally {
             setNewComment('');
             fetchTopics();
         }
-        success()
     }
 
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setNewTopic((prev) => ({
+            ...prev,
+            title: '',
+            text: '',
+        }));
+    }
 
     return {
         contextHolder,
@@ -134,15 +141,11 @@ const useTopicsFunction = () => {
         fetchTopics,
         createNewTopic,
         closeModal,
-        success,
-        errorMessage,
         user,
         setNewComment,
         newComment,
         addNewComment,
     };
-
-
 }
 
 export default useTopicsFunction;

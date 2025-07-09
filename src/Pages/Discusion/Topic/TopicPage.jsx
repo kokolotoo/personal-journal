@@ -64,6 +64,8 @@ const TopicPage = () => {
                     <AllComments
                         currentTopic={currentTopic}
                     />
+
+                    
                 </section>
             ) : (
                 <p>Loading topic...</p>

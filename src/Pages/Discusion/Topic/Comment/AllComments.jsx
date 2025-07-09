@@ -1,9 +1,14 @@
 import React from 'react'
 import styles from '../topic.module.css'
 
+
 const AllComments = ({ currentTopic }) => {
 
+
+
     return (
+
+
         <main
             className={styles.commentsContainer}
         >
@@ -25,6 +30,8 @@ const AllComments = ({ currentTopic }) => {
                 </ul>
             )}
         </main>
+
+
     )
 }
 
