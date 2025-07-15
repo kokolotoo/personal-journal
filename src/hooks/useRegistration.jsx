@@ -5,11 +5,13 @@ import {
     createUserWithEmailAndPassword, updateProfile
 } from 'firebase/auth';
 import { auth } from '../hooks/firebase_config';
+import useFunction from '../../hooks/useFunction';
 
 const useRegistration = () => {
-
-    const { setLogin,  setUser } = useContext(DataContext)
+    const { fetchMessages } = useFunction();
+    const { setLogin, setUser } = useContext(DataContext)
     const navigation = useNavigate()
+   
 
     const [formData, setFormData] = useState({
         username: "",
@@ -85,7 +87,7 @@ const useRegistration = () => {
                     password: "",
                     confirmPassword: "",
                 });
-
+                
 
                 setTimeout(() => {
                     navigation('/')

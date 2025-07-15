@@ -86,19 +86,20 @@ const useFunction = () => {
 
     
 
-    const fetchMessages = useCallback(async () => {
+    const fetchMessages = useCallback(async (currentUser) => {
         try {
-            const messagesRef = collection(db, 'Messages');
+            const messagesRef = collection(db, `Messages/${currentUser}/Message`)
             const q = query(messagesRef, orderBy('createdAt', 'desc'));
             const querySnapshot = await getDocs(q);
             const messagesArray = querySnapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data()
             }));
+            
            return messagesArray;
         } catch (err) {
             console.log(err.message);
-        }
+        } 
     })
 
 

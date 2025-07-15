@@ -12,20 +12,9 @@ import useFunction from '../../hooks/useFunction';
 const NavBar = () => {
 
   const { user, login, messages, setMessages } = useContext(DataContext);
-  const { fetchMessages } = useFunction();
+  
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const messagesArray = await fetchMessages();
-        setMessages(messagesArray);
-      } catch (error) {
-        console.error("Error fetching messages:", error);
-      }
-    };
-
-    fetchData();
-  },[])
+  
 
   return (
     <div className={styles.navContainer}>

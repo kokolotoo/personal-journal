@@ -4,11 +4,12 @@ import DataContext from '@/Context/DataContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { googleProvider, auth } from '../../hooks/firebase_config';
 import { signInWithPopup, signInWithEmailAndPassword, getAuth, sendPasswordResetEmail } from 'firebase/auth';
-
+import useFunction from '../../hooks/useFunction';
 
 const loginPage = () => {
 
-    const { setUser, setLogin, login } = useContext(DataContext);
+    const { fetchMessages } = useFunction();
+    const { setUser, setLogin, login, setMessages } = useContext(DataContext);
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -24,6 +25,10 @@ const loginPage = () => {
                 email: userCredential.user.email,
                 id: userCredential.user.uid
             };
+
+            const messagesArray = await fetchMessages(newUser.id);
+            setMessages(messagesArray);
+
             setUser(newUser);
             setLogin(true);
             setLoginError(`Welcome ${userCredential.user.displayName}`);
@@ -52,6 +57,10 @@ const loginPage = () => {
                 email: userCredential.user.email,
                 id: userCredential.user.uid
             };
+
+            const messagesArray = await fetchMessages(newUser.id);
+            setMessages(messagesArray);
+
             setUser(newUser);
             setLoginError(`Welcomme ${userCredential.user.displayName}`)
             setLogin(true)
@@ -82,7 +91,7 @@ const loginPage = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            
+
                         />
 
                     </div>
