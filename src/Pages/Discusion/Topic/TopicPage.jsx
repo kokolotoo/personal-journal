@@ -23,6 +23,8 @@ const TopicPage = () => {
         if (allTopics.length > 0) {
             const topic = allTopics.find(topic => topic.id === topicId);
             setCurrentTopic(topic);
+           // console.log(topic);
+
         }
     }, [allTopics, topicId]);
 
@@ -59,7 +61,10 @@ const TopicPage = () => {
                         setNewComment={setNewComment}
                     />
 
-                    <AllComments currentTopic={currentTopic} />
+                    <AllComments
+                        currentTopic={currentTopic}
+                        user={user}
+                    />
                 </section>
             ) : (
                 <p>Loading topic...</p>

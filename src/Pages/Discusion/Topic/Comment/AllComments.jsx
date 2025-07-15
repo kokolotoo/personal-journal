@@ -1,10 +1,13 @@
 import React from 'react'
 import styles from '../topic.module.css'
+import { useState, useContext, useEffect } from 'react';
+import { doc, setDoc, getDocs, collection, query, orderBy } from "firebase/firestore";
+import { db } from '@/hooks/firebase_config';
 
 
-const AllComments = ({ currentTopic }) => {
+const AllComments = ({ currentTopic, user }) => {
 
-
+    const [message, setMessage] = useState('');
 
     return (
 
@@ -17,7 +20,11 @@ const AllComments = ({ currentTopic }) => {
                     {currentTopic.comments.map((comment, index) => (
                         <li key={index} className={styles.commentItem}>
                             <div className={styles.commentInfo}>
-                                <p><b>{comment.user}</b>:</p>
+                                <b
+                                    style={comment.userId === user.id ? { color: 'rgb(128,128,0)' } : {}}
+                                >
+                                    {comment.user}
+                                </b>
                                 <span className={styles.commentDate}>
                                     {comment.date}
                                 </span>

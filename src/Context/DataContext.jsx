@@ -6,6 +6,7 @@ const DataContext = createContext({});
 export const DataProvider = ({ children }) => {
     const [login, setLogin] = useState(false)
     const [user, setUser] = useState(null)
+   const [messages, setMessages] = useState([]);
 
     useEffect(() => {
         const isLogin = sessionStorage.getItem('loginData')
@@ -18,7 +19,7 @@ export const DataProvider = ({ children }) => {
     return (
         <DataContext.Provider value={{
             login, setLogin, user, setUser,
-
+            messages, setMessages
         }}>
             {children}
         </DataContext.Provider>

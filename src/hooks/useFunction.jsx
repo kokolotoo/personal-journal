@@ -15,6 +15,7 @@ const useFunction = () => {
     const [editBody, setEditBody] = useState('');
     const [viewNotes, setViewNotes] = useState(false);
     const [visibleNewNote, setVisibleNewNote] = useState(false);
+    
 
 
     const startEditing = (note) => {
@@ -24,7 +25,7 @@ const useFunction = () => {
     };
 
 
-    
+
     const saveEditedNote = async () => {
         try {
             const noteRef = doc(db, 'Users', user.id, 'Notes', editNoteId);
@@ -83,6 +84,23 @@ const useFunction = () => {
         }
     }, [user?.id]);  // зависи само от user.id
 
+    
+
+    const fetchMessages = useCallback(async () => {
+        try {
+            const messagesRef = collection(db, 'Messages');
+            const q = query(messagesRef, orderBy('createdAt', 'desc'));
+            const querySnapshot = await getDocs(q);
+            const messagesArray = querySnapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+           return messagesArray;
+        } catch (err) {
+            console.log(err.message);
+        }
+    })
+
 
 
     const addNote = async () => {
@@ -128,7 +146,7 @@ const useFunction = () => {
         editTitle, setEditTitle, editBody, setEditBody,
         startEditing, saveEditedNote, deleteNote, fetchNotes,
         addNote, user, viewNotes, setViewNotes, visibleNewNote,
-        setVisibleNewNote
+        setVisibleNewNote, fetchMessages
     }
 
 }

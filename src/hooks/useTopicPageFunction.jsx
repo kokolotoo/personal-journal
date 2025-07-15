@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const useTopicsFunction = ( currentTopic, user, fetchTopics ) => {
     const navigate = useNavigate();
 
+
     const lockUnlockTopic = async (topicId, lock) => {
         if (confirm(`Are you sure you want to ${lock ? 'lock' : 'unlock'} this topic?`)) {
             try {
