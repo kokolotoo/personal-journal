@@ -3,11 +3,15 @@ import styles from '../topic.module.css'
 import { useState, useContext, useEffect } from 'react';
 import { doc, setDoc, getDocs, collection, query, orderBy } from "firebase/firestore";
 import { db } from '@/hooks/firebase_config';
+import useFunction from '@/hooks/useFunction';
 
 
 const AllComments = ({ currentTopic, user }) => {
 
     const [message, setMessage] = useState('');
+    const { sendUserMessage } = useFunction()
+    console.log(currentTopic);
+
 
     return (
 
@@ -25,7 +29,7 @@ const AllComments = ({ currentTopic, user }) => {
                                 >
                                     {comment.user}
                                 </b>
-                                <span className={styles.commentDate}>
+                                <span>
                                     {comment.date}
                                 </span>
                             </div>

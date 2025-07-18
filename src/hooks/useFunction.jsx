@@ -104,6 +104,34 @@ const useFunction = () => {
 
 
 
+    const sendUserMessage = async (message, currentUser) => {
+        if (message.trim() === '') return;
+
+        const now = new Date();
+        const formattedDate = now.toISOString().replace(/[:.]/g, "-"); // безопасен ID без ':' и '.'
+
+        try {
+            const messagesRef = collection(db, `Messages/${currentUser}/Message`);
+            const messageRef = doc(messagesRef, formattedDate); // вече безопасно ID
+
+            await setDoc(messageRef, {
+                message: message,
+                createdAt: now,
+                from: {
+                    name: user.name,
+                    id: user.id
+                },
+                seen: false,
+                answered: false
+            });
+
+            console.log('Message sent');
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+
+
     const addNote = async () => {
         if (title.trim() === '' || newNote.trim() === '') return
 
@@ -147,7 +175,7 @@ const useFunction = () => {
         editTitle, setEditTitle, editBody, setEditBody,
         startEditing, saveEditedNote, deleteNote, fetchNotes,
         addNote, user, viewNotes, setViewNotes, visibleNewNote,
-        setVisibleNewNote, fetchMessages
+        setVisibleNewNote, fetchMessages, sendUserMessage
     }
 
 }

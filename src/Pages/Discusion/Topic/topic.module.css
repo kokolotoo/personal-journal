@@ -27,6 +27,7 @@
     letter-spacing: 1px;
     color: rgb(231, 255, 184);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    cursor: pointer;
 }
 
 .main {
@@ -171,6 +172,10 @@
     justify-content: space-between;
     font-size: 0.7em;
     color: rgb(104, 97, 97);
+}
+
+.commentInfo b{
+    cursor: pointer;
 }
 
 .commentContent {
