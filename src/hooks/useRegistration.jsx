@@ -5,7 +5,7 @@ import {
     createUserWithEmailAndPassword, updateProfile
 } from 'firebase/auth';
 import { auth } from '../hooks/firebase_config';
-import useFunction from '../../hooks/useFunction';
+import useFunction from './useFunction';
 
 const useRegistration = () => {
     const { fetchMessages } = useFunction();

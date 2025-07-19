@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useRegistration from '@/hooks/useRegistration';
+//import useRegistration from '../../hooks/useRegistration';
 import '../Login/login.css'
-
+import useRegistration from '@/hooks/useRegistration';
 
 
 const Registration = () => {
